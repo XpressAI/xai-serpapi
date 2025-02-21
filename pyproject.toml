@@ -8,6 +8,10 @@ readme = "README.md"
 repository = "git@github.com:XpressAI/xai-serpapi.git"
 keywords = ["xircuits", "google", "bing", "serp", "duckduckgo", "yahoo"]
 
+dependencies = [
+    "serpapi==0.1.5",
+]
+
 # Xircuits-specific configurations
 [tool.xircuits]
 requirements_path = "requirements.txt"
