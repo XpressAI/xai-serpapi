@@ -5,6 +5,15 @@ import serpapi
 
 @xai_component
 class SerpApiAuthorize(Component):
+    """A component to authorize and initialize a SerpAPI client.
+
+    ##### inPorts:
+    - api_key (secret): The SerpAPI key.
+    - from_env (bool): Use API key from environment variable if True.
+
+    ##### outPorts:
+    - client (object): The initialized SerpAPI client.
+    """
     api_key: InArg[secret]
     from_env: InCompArg[bool]
 
