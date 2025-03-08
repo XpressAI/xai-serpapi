@@ -22,9 +22,13 @@ class SerpApiAuthorize(Component):
     def execute(self, ctx) -> None:
         if self.from_env.value:
             client = serpapi.Client(api_key=os.getenv('SERP_API_KEY', None))
-        else:
+        elif self.api_key.value:
             # Initialize the SerpApi client with the provided API key
             client = serpapi.Client(api_key=self.api_key.value)
+        else:
+            #Initialize the SerpApi client using the relay proxy.
+            client = serpapi.Client(api_key=os.getenv('VECTO_API_KEY', None))
+            client.BASE_DOMAIN = 'https://relay.public.cloud.xpress.ai'
 
         ctx['serp_client'] = client
         self.client.value = client
