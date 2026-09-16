@@ -40,6 +40,12 @@ Before you begin, you will need the following:
 ### SerpApiAuthorize Component:  
 Authenticates and initializes the SerpAPI client.  
 
+For the Relay path (no explicit SerpAPI key and `from_env=false`), set
+`XPRESSAI_RELAY_TOKEN` to the credential provisioned for the workload's Relay
+budget. The client sends it in the Authorization header, not the URL query.
+Missing credentials fail before dispatch. `VECTO_API_KEY` and Platform API tokens
+are not Relay credentials. Direct SerpAPI authentication remains unchanged.
+
 <img src="https://github.com/user-attachments/assets/bb017eb5-e7ef-42b5-99ee-e598417b6075" alt="Image" width="200" height="100" />
 
 ### SerpApiSearch Component:  
@@ -67,4 +73,3 @@ You can also do it manually by cloning and installing it:
 git clone https://github.com/XpressAI/xai-serpapi xai_components/xai_serpapi
 pip install -r xai_components/xai_serpapi/requirements.txt
 ```
-
