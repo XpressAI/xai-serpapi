@@ -26,9 +26,13 @@ class SerpApiAuthorize(Component):
             # Initialize the SerpApi client with the provided API key
             client = serpapi.Client(api_key=self.api_key.value)
         else:
-            #Initialize the SerpApi client using the relay proxy.
-            client = serpapi.Client(api_key=os.getenv('VECTO_API_KEY', None))
+            # Relay uses its own scoped credential, never a vector-store key.
+            relay_token = os.getenv('XPRESSAI_RELAY_TOKEN', '').strip()
+            if not relay_token:
+                raise ValueError('Set XPRESSAI_RELAY_TOKEN to an authorized Relay credential.')
+            client = serpapi.Client(api_key=None)
             client.BASE_DOMAIN = 'https://relay.public.cloud.xpress.ai'
+            client.session.headers['Authorization'] = f'Bearer {relay_token}'
 
         ctx['serp_client'] = client
         self.client.value = client
